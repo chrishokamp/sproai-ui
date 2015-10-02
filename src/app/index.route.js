@@ -30,6 +30,11 @@
         templateUrl: 'app/states/question_card/question.html',
         controller: 'QuestionController',
         controllerAs: 'qCtrl'
+      })
+      .state('main.questions', {
+        url: '/questions',
+        templateUrl: 'app/states/questions/questions.html',
+        controller: 'QuestionsController',
       });
 
     $urlRouterProvider.otherwise('/home');

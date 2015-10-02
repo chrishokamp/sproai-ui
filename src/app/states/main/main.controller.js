@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr, quizService) {
+  function MainController($timeout, $scope, $log, webDevTec, toastr, quizService) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -40,6 +40,9 @@
      return quizService.getQuiz().then(function(data) {
 
           vm.questions = data;
+          //hack
+          $scope.questions = data.questions;
+          $log.log($scope.questions);
           vm.userName = data.userName;
           return data;
         });     // todo: pass the userID to the service
