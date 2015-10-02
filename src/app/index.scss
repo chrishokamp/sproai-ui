@@ -11,7 +11,7 @@ html {
   font-family: 'Roboto Slab', serif;
 }
 body{
-  background: #eee;
+  background: #ddd;
 }
 [layout=row] {
   flex-direction: row;
@@ -63,14 +63,24 @@ section.jumbotron {
   }
 }
 div.questionCard{
+  position: relative;
   border-radius: 4px;
   background: #fff;
   min-width: 400px;
   width: 40%;
-  min-height: 300px;
+  min-height: 200px;
   margin: auto;
-  overflow: hidden;
-
+  padding-bottom: 2px;
+  div.close{
+    position: absolute;
+    right:-20px;
+    top:-20px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background: #edeeed;
+    border: 4px solid #ddd;
+  }
   div.header{
     font-weight: bold;
     line-height: 45px;
@@ -78,22 +88,33 @@ div.questionCard{
     font-size:22px;
     height:50px;
     color: #fff;
-    background: #05f;
-    width:100%;
-    border-bottom: 3px solid #eee;
+    background: #31809a;
+    border-radius: 4px;
+    border-bottom: 4px solid #ddd;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
   div.answers{
+    position: relative;
     div.answer{
+      cursor: pointer;
       margin: 10px;
       padding: 10px;
       border-radius: 5px;
-      background: #eee;
+      background: #e7e9e8;
+    }
+    div.answer:hover{
+      background: #bbd2d9;
+    }
+    div.answer.correct{
+      background: #87c764;
+      color: #fff;
     }
   }
 }
 
 md-content{
-  background: #eee;
+  background: #ddd;
 }
 /**
  *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
