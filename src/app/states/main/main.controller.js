@@ -40,6 +40,7 @@
      return quizService.getQuiz().then(function(data) {
 
           vm.questions = data;
+          vm.userName = data.userName;
           return data;
         });     // todo: pass the userID to the service
     }

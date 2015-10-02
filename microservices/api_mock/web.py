@@ -10,36 +10,36 @@ def get_questions():
     questions = [
         {
             "answers": [
-                "Not much, really.", 
-                "Oh, nothing interesting", 
-                "Just wanted to say hi.", 
+                "Not much, really.",
+                "Oh, nothing interesting",
+                "Just wanted to say hi.",
                 "There's no 4th answer."
-            ], 
-            "question_id": 1, 
+            ],
+            "question_id": 1,
             "question_str": "What's up?"
-        }, 
+        },
         {
             "answers": [
-                "Man U.", 
-                "Barcelona.", 
-                "Bayern Munich.", 
+                "Man U.",
+                "Barcelona.",
+                "Bayern Munich.",
                 "Liverpool."
-            ], 
-            "question_id": 2, 
+            ],
+            "question_id": 2,
             "question_str": "What's your favorite team?"
-        }, 
+        },
         {
             "answers": [
-                "Dublin.", 
-                "Galway.", 
-                "Donegal.", 
+                "Dublin.",
+                "Galway.",
+                "Donegal.",
                 "Belfast."
-            ], 
-            "question_id": 2, 
+            ],
+            "question_id": 2,
             "question_str": "What's your favorite city?"
         }
     ]
-    return jsonify(questions)
+    return jsonify({"userName": userName, "questions": questions})
 
 app.run(debug=True, port=7777)
 
