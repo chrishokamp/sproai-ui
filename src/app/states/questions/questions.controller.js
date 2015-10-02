@@ -6,7 +6,9 @@
     .controller('QuestionsController', QuestionsController);
 
   /** @ngInject */
-  function QuestionsController($timeout, $log, $scope, quizService) {
+  function QuestionsController($timeout, $log, $scope, quizService, questionSet) {
+
+    $scope.questions = questionSet.questions;
 
     $scope.showQs = function() {
       $log.log('scope questions');

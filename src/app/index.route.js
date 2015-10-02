@@ -35,6 +35,13 @@
         url: '/questions',
         templateUrl: 'app/states/questions/questions.html',
         controller: 'QuestionsController',
+        resolve: {
+            // Example using function with simple return value.
+            // Since it's not a promise, it resolves immediately.
+            questionSet:  function(quizService){
+              return quizService.getQuiz();
+            },
+        }
       });
 
     $urlRouterProvider.otherwise('/home');
