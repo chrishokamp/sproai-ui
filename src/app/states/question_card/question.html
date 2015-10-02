@@ -1,19 +1,21 @@
 <div>
 
-    <div ng-repeat="question in qCtrl.questions">
-        {{question.question_str}}
-    </div>
 
+    <div class="qust">
+
+    </div>
     <div class="questionCard">
         <div class="close">
-
+            <span class="ion-close"></span>
         </div>
         <div class="header">
             Question.
         </div>
         <div class="answers">
             <div class="answer">
-                Answer
+                <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+                    Checkbox 1: {{ data.cb1 }}
+                </md-checkbox>
             </div>
             <div class="answer">
                 Answer

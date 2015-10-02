@@ -70,16 +70,25 @@ div.questionCard{
   width: 40%;
   min-height: 200px;
   margin: auto;
+  margin-top: 50px;
   padding-bottom: 2px;
   div.close{
     position: absolute;
     right:-20px;
     top:-20px;
-    width:40px;
-    height:40px;
+    width:35px;
+    height:35px;
     border-radius:50%;
     background: #edeeed;
-    border: 4px solid #ddd;
+    border: 6px solid #ddd;
+    text-align: center;
+    line-height: 35px;
+    color: #999;
+    font-size: 22px;
+    cursor:pointer;
+  }
+  div.close:hover{
+    background: #bbd2d9;
   }
   div.header{
     font-weight: bold;
