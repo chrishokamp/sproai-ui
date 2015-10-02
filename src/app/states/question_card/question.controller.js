@@ -6,7 +6,7 @@
     .controller('QuestionController', QuestionController);
 
   /** @ngInject */
-  function QuestionController($timeout, webDevTec, toastr) {
+  function QuestionController($timeout, $mdDialog, webDevTec, toastr) {
 
     this.questions = [
         {
@@ -18,6 +18,22 @@
             question_id: 2
         }
     ];
+
+    this.showQuitDialog = function(ev){
+        var quitDialog = $mdDialog.confirm()
+          .title('Are you sure you want to quit?')
+          .content('Participants must complete between 20 and 100 questions or all game progress will be lost')
+          .ariaLabel('Quit Early')
+          .targetEvent(ev)
+          .ok('Quit')
+          .cancel('Continue');
+
+        $mdDialog.show(quitDialog).then(function() {
+            // User ends quiz
+        }, function() {
+            // User continues with the quiz
+        });
+    };
 
   }
 })();
