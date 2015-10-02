@@ -16,13 +16,17 @@
 
     return service;
 
+    // TODO: change name to "setupQuiz"
     function getQuiz() {
 
-      return $http.get(apiHost + '/questions')
+      // TODO: use $http object
+      return $http.get(apiHost + '/questions?userName=user42')
         .then(getQuestionsComplete)
         .catch(getQuestionsFailed);
 
       function getQuestionsComplete(response) {
+        // TODO: side effect to set username
+        //userService.userName = response.data.userName;
         return response.data;
       }
 
