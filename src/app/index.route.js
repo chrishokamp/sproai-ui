@@ -24,7 +24,13 @@
         templateUrl: 'app/states/quiz/quiz.html',
         controller: 'MainController',
         controllerAs: 'main'
-    });
+      })
+      .state('main.question', {
+        url: '/question',
+        templateUrl: 'app/states/question_card/question.html',
+        controller: 'QuestionController',
+        controllerAs: 'qCtrl'
+      });
 
     $urlRouterProvider.otherwise('/home');
   }
