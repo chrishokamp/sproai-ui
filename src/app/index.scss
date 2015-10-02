@@ -10,7 +10,9 @@
 html {
   font-family: 'Roboto Slab', serif;
 }
-
+body{
+  background: #eee;
+}
 [layout=row] {
   flex-direction: row;
 }
@@ -60,7 +62,33 @@ section.jumbotron {
     }
   }
 }
+div.questionCard{
+  border-radius: 4px;
+  background: #fff;
+  min-width: 400px;
+  width: 40%;
+  min-height: 300px;
+  margin: auto;
+  overflow: hidden;
 
+
+
+  div.header{
+    font-weight: bold;
+    line-height: 45px;
+    padding-left: 10px;
+    font-size:22px;
+    height:50px;
+    color: #fff;
+    background: #05f;
+    width:100%;
+    border-bottom: 3px solid #eee;
+  }
+}
+
+md-content{
+  background: #eee;
+}
 /**
  *  Do not remove this comments bellow. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
