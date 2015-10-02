@@ -1,0 +1,28 @@
+<div>
+
+    <md-button ng-click="showQs()">log questions</md-button>
+    <md-button ng-click="getQuestions()">get questions</md-button>
+    <div ng-repeat="question in questions">
+        <div class="questionCard">
+            <div class="close">
+
+            </div>
+            <div class="header">
+                <p>Question. {{question.question_id}}</p>
+                <p>{{question.question_str}}</p>
+            </div>
+
+            <div ng-repeat="answer in question.answers" class="answers">
+                <div class="answer">
+                    {{answer}}
+                </div>
+                <!--<div class="answer correct">-->
+                    <!--Answer-->
+                <!--</div>-->
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

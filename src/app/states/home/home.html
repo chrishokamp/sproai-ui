@@ -2,13 +2,13 @@
     <div layout="column" layout-align="center center">
         <h3>Welcome!!!</h3>
         <md-button ng-click="main.getQuestions()">Get Questions</md-button>
-        <div>{{main.questions}}</div>
+        <!--<div>{{main.questions}}</div>-->
 
         <md-input-container>
             <label>Username</label>
             <input type="text" ng-model="user.name">
         </md-input-container>
-        <md-button class="md-raised">Start Quiz</md-button>
+        <md-button ui-sref="main.questions" class="md-raised">Start Quiz</md-button>
         <!--<md-input-container>-->
             <!--<label>Description</label>-->
             <!--<textarea ng-model="user.description"></textarea>-->
