@@ -87,6 +87,20 @@ div.questionCard{
     font-size: 22px;
     cursor:pointer;
   }
+  div.nextArrow{
+    position: absolute;
+    right:-50px;
+    top:50%;
+    margin-top: -25px;
+    cursor:pointer;
+    span{
+      color:#87c764;
+      font-size: 48px;
+    }
+    span:hover{
+      color: #63c32e;
+    }
+  }
   div.close:hover{
     background: #bbd2d9;
   }
