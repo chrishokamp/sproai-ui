@@ -6,7 +6,7 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, webDevTec, toastr) {
+  function MainController($timeout, webDevTec, toastr, quizService) {
     var vm = this;
 
     vm.awesomeThings = [];
@@ -35,5 +35,14 @@
         awesomeThing.rank = Math.random();
       });
     }
+
+    vm.getQuestions = function() {
+     return quizService.getQuiz().then(function(data) {
+
+          vm.questions = data;
+          return data;
+        });     // todo: pass the userID to the service
+    }
+
   }
 })();
