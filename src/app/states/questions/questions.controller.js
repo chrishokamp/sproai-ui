@@ -13,8 +13,14 @@
         }
 
         /**
-         * Private Members and methods
-         */
+        * Private Members and methods
+        */
+        if (!Date.now) { /*Polyfill nm: this might not be super angular dunno.*/
+            Date.now = function now() {
+                return new Date().getTime();
+            };
+        }
+        var startTime = Date.now();
 
         var skipConfirm = $mdDialog.confirm()
             .title('Skip Question?')
@@ -23,6 +29,11 @@
             .ok('Skip')
             .cancel('No, Answer');
 
+        var selectAlert = $mdDialog.alert()
+            .title('Please select an answer')
+            .content('You must first select and answer before continuing.')
+            .ariaLabel('select an answer')
+            .ok('ok');
         // nm: should I consider if .questions is null? - meh for now
         var questions = $rootScope.quiz.questions;
         var questionPointer = 0;
@@ -44,8 +55,8 @@
         }
 
         /**
-         * "Public" Members and methods
-         */
+        * "Public" Members and methods
+        */
 
         console.log("[qCtrl               ] currentQuestion: " + questions[questionPointer].question_id);
         $scope.currentQuestion = questions[questionPointer];
@@ -73,7 +84,6 @@
                     ev.target.className += " incorrect";
                     var correct = document.getElementById("answer-" + (questions[questionPointer].correct_answer - 1));
                     correct.className += " correct";
-
                 }
             }
         };
@@ -82,15 +92,15 @@
             console.log("[qCtrl.nextQuestion   ] CALLED");
             // Has the user selected an answer
             if(!answerChosen){
-                $mdDialog.show(skipConfirm).then(changeQuestion);
+                $mdDialog.show(selectAlert);
             } else if (questionPointer <= questions.length) {
                 changeQuestion();
             }
         };
 
         /**
-         * Stub
-         */
+        * Stub
+        */
         this.submitAnswers = function(ev) {
             console.log("[qCtrl.submitAnswers  ] CALLED");
             console.log(answers);
