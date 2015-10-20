@@ -1,52 +1,36 @@
 (function() {
-  'use strict';
+    'use strict';
 
-  angular
+    angular
     .module('spraoiUi')
     .controller('MainController', MainController);
 
-  /** @ngInject */
-  function MainController($timeout, $scope, $log, webDevTec, toastr, quizService) {
-    var vm = this;
+    /** @ngInject */
+    function MainController($rootScope, $scope, $state, $mdDialog, quizService) {
 
-    vm.awesomeThings = [];
-    vm.classAnimation = '';
-    vm.creationDate = 1443777927383;
-    vm.showToastr = showToastr;
 
-    activate();
+        function gotQuestions(data){
+            console.log("YO2");
+            console.log(data);
 
-    function activate() {
-      getWebDevTec();
-      $timeout(function() {
-        vm.classAnimation = 'rubberBand';
-      }, 4000);
+            $rootScope.quiz = data;
+            $state.go('^.questions');   // nm: someone smart could probably send things as params. http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.$state#methods_go
+        }
+
+        this.startQuiz = function(ev){
+            console.log("YO");
+            console.log($scope.username);
+
+            if ($scope.username) {
+                quizService.getQuiz($scope.username).then(gotQuestions);
+            } else {
+                var quitDialog = $mdDialog.alert({
+                    title: 'Attention',
+                    content: 'Please enter and email address',
+                    ok: 'Ok'
+                });
+                $mdDialog.show(quitDialog);
+            }
+        };
     }
-
-    function showToastr() {
-      toastr.info('Fork <a href="https://github.com/Swiip/generator-gulp-angular" target="_blank"><b>generator-gulp-angular</b></a>');
-      vm.classAnimation = '';
-    }
-
-    function getWebDevTec() {
-      vm.awesomeThings = webDevTec.getTec();
-
-      angular.forEach(vm.awesomeThings, function(awesomeThing) {
-        awesomeThing.rank = Math.random();
-      });
-    }
-
-    vm.getQuestions = function() {
-     return quizService.getQuiz().then(function(data) {
-
-          vm.questions = data;
-          //hack
-          $scope.questions = data.questions;
-          $log.log($scope.questions);
-          vm.userName = data.userName;
-          return data;
-        });     // todo: pass the userID to the service
-    }
-
-  }
 })();

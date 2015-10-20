@@ -1,56 +1,45 @@
 (function() {
-  'use strict';
+    'use strict';
 
-  angular
+    angular
     .module('spraoiUi')
     .config(routeConfig);
 
-  /** @ngInject */
-  function routeConfig($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('main', {
-        templateUrl: 'app/states/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
-      })
-      .state('main.home', {
-        url: '/home',
-        templateUrl: 'app/states/home/home.html',
-        controller: 'MainController',
-        controllerAs: 'main'
-      })
-      .state('main.quiz', {
-        url: '/quiz',
-        templateUrl: 'app/states/quiz/quiz.html',
-        controller: 'MainController',
-        controllerAs: 'main'
-      })
-      .state('main.question', {
-        url: '/question',
-        templateUrl: 'app/states/question_card/question.html',
-        controller: 'QuestionController',
-        controllerAs: 'qCtrl'
-      })
-      .state('main.questions', {
-        url: '/questions',
-        templateUrl: 'app/states/questions/questions.html',
-        controller: 'QuestionsController',
-        resolve: {
-            // Example using function with simple return value.
-            // Since it's not a promise, it resolves immediately.
-            questionSet:  function(quizService){
-              return quizService.getQuiz();
-            },
-        }
-      })
-      .state('main.questionNav', {
-        url: '/questionNav',
-        templateUrl: 'app/states/question_card/question.navigator.html',
-        controller: 'QuestionControllerNav',
-        controllerAs: 'qCtrlNav'
-      });
+    /** @ngInject */
+    function routeConfig($stateProvider, $urlRouterProvider) {
+        $stateProvider
+        .state('main', {
+            templateUrl: 'app/states/main/main.html',
+            controller: 'MainController',
+            controllerAs: 'main'
+        })
+        .state('main.home', {
+            url: '/home',
+            templateUrl: 'app/states/home/home.html',
+            controller: 'MainController',
+            controllerAs: 'main',
+            parent: 'main'
+        })
+        .state('main.question', {
+            url: '/question',
+            templateUrl: 'app/states/question_card/question.html',
+            controller: 'QuestionController',
+            controllerAs: 'qCtrl'
+        })
+        .state('main.questions', {
+            url: '/questions',
+            templateUrl: 'app/states/questions/questions.html',
+            controller: 'QuestionsController',
+            controllerAs: 'qCtrl',
+            parent: 'main'
+        })
+        .state('main.questionNav', {
+            url: '/questionNav',
+            templateUrl: 'app/states/question_card/question.navigator.html',
+            controller: 'QuestionControllerNav',
+            controllerAs: 'qCtrlNav'
+        });
 
-    $urlRouterProvider.otherwise('/home');
-  }
-
+        $urlRouterProvider.otherwise('/home');
+    }
 })();

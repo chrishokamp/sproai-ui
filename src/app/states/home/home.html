@@ -4,9 +4,9 @@
 
         <md-input-container>
             <label>Username</label>
-            <input type="text" ng-model="user.name">
+            <input type="text" ng-model="username">
         </md-input-container>
-        <md-button ui-sref="main.questions" class="md-raised">Start Quiz</md-button>
+        <md-button ng-click="main.startQuiz($event)" class="md-raised">Start Quiz</md-button>
         <!--<md-input-container>-->
             <!--<label>Description</label>-->
             <!--<textarea ng-model="user.description"></textarea>-->

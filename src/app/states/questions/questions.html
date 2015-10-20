@@ -1,24 +1,24 @@
 <div>
 
-    <div ng-repeat="question in questions">
-        <div class="questionCard">
+    <div class="questionCard">
 
-            <!--<div class="nextArrow">-->
-                <!--<span class="ion-android-arrow-dropright-circle"></span>-->
-            <!--</div>-->
-            <div class="header">
-                Question {{question.question_id}}: {{question.question_str}}
-            </div>
-            <div ng-repeat="answer in question.answers" class="answers">
-                <div class="answer">
-                    <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
-                        {{answer}}
-                    </md-checkbox>
-                </div>
-            </div>
+        <div class="nextArrow" ng-show="showNext">
+            <span class="ion-android-arrow-dropright-circle" ng-click="qCtrl.nextQuestion($event)"></span>
         </div>
 
+        <div class="header">
+            Question {{currentQuestion.question_id}}: {{currentQuestion.question_str}}
+        </div>
 
+        <div ng-repeat="answer in currentQuestion.answers" class="answers">
+            <div class="answer">
+                <!-- <md-checkbox ng-model="data.cb1" aria-label="Checkbox 1"> -->
+                    {{answer}}
+                <!-- </md-checkbox> -->
+            </div>
+        </div>
     </div>
+
+
 
 </div>
