@@ -42,6 +42,12 @@
               return quizService.getQuiz();
             },
         }
+      })
+      .state('main.questionNav', {
+        url: '/questionNav',
+        templateUrl: 'app/states/question_card/question.navigator.html',
+        controller: 'QuestionControllerNav',
+        controllerAs: 'qCtrlNav'
       });
 
     $urlRouterProvider.otherwise('/home');

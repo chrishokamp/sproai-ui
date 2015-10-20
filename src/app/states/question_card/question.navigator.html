@@ -1,0 +1,48 @@
+<style>
+    .navRight {
+        position: absolute;
+        right: 250px;
+        top:200px;
+        width: 20%;
+        /*border:3px solid #8AC007;*/
+        padding: 10px;
+    }
+    .progress{
+        width: 40%;
+        margin:0 auto;
+        margin-top: 20px;
+    }
+</style>
+<div>
+    <div ng-repeat="question in qCtrlNav.questions">
+        {{question.question_str}}
+    </div>
+
+    <md-button ng-click="qCtrlNav.gotoNextQuestion()" ng-disabled="qCtrlNav.currentQuestionId == qCtrlNav.MaxQuestionID"
+            class="navRight">
+        <img id="gotoNextQuestion" ng-src="/images/Play1Pressed.png" width="20%" height="20%"/>
+    </md-button>
+    <div class="questionCard">
+        <div class="close">
+
+        </div>
+        <div class="header">
+            Question.
+        </div>
+        <div class="answers">
+            <div class="answer">
+                Answer
+            </div>
+            <div class="answer">
+                Answer
+            </div>
+            <div class="answer correct">
+                Answer
+            </div>
+            <div class="answer">
+                Answer
+            </div>
+        </div>
+    </div>
+    <md-progress-linear class="progress" md-mode="determinate" value="{{qCtrlNav.progressBarValue}}" ></md-progress-linear>
+</div>

@@ -14,7 +14,7 @@
       $log.log('scope questions');
       $log.log($scope.questions);
 
-    }
+    };
 
     $scope.getQuestions = function() {
       return quizService.getQuiz().then(function(data) {
@@ -26,7 +26,7 @@
         //vm.userName = data.userName;
         return data;
       });     // todo: pass the userID to the service
-    }
+    };
 
   }
 })();
