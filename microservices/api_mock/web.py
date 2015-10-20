@@ -17,7 +17,7 @@ def get_questions():
             ],
             "question_id": 1,
             "question_str": "What's up?",
-            "correct_answer":"0"
+            "correct_answer":1
         },
         {
             "answers": [
@@ -28,7 +28,7 @@ def get_questions():
             ],
             "question_id": 2,
             "question_str": "What's your favorite team?",
-            "correct_answer":"1"
+            "correct_answer":1
         },
         {
             "answers": [
@@ -37,13 +37,12 @@ def get_questions():
                 "Donegal.",
                 "Belfast."
             ],
-            "question_id": 2,
+            "question_id": 3,
             "question_str": "What's your favorite city?",
-            "correct_answer":"1"
+            "correct_answer":1
         }
     ]
 
     return jsonify({"userName": userName, "questions": questions})
 
 app.run(debug=True, port=7777)
-
