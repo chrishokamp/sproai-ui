@@ -1,15 +1,13 @@
 <div class="login-wrapper" layout="column" layout-align="center center">
-    <div layout="column" layout-align="center center">
-        <h3>Welcome!!!</h3>
+    <div class="loginCard" layout="column" layout-align="center center">
 
-        <md-input-container>
-            <label>Username</label>
-            <input type="text" ng-model="username">
-        </md-input-container>
-        <md-button ng-click="main.startQuiz($event)" class="md-raised">Start Quiz</md-button>
+        <img class="logo" src="/assets/images/spraoi-logo.png" />
+
+        <input type="text" placeholder="Username" ng-model="username">
+        <button class="button-primary" ng-click="main.startQuiz($event)">Login</button>
         <!--<md-input-container>-->
-            <!--<label>Description</label>-->
-            <!--<textarea ng-model="user.description"></textarea>-->
+        <!--<label>Description</label>-->
+        <!--<textarea ng-model="user.description"></textarea>-->
         <!--</md-input-container>-->
     </div>
 

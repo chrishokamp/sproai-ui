@@ -11,20 +11,18 @@
 
         var service = {
             apiHost: apiHost,
-            getQuiz: getQuiz
+            getQuiz: getQuiz,
+            submitQuiz : submitQuiz
         };
 
         return service;
 
         // TODO: change name to "setupQuiz"
         function getQuiz(username) {
-
-            console.log("username: " + username);
-            //console.log($scope.userName);
             // TODO: use $http object
             return $http.get(apiHost + '/questions?userName=' + username)
-            .then(getQuestionsComplete)
-            .catch(getQuestionsFailed);
+                .then(getQuestionsComplete)
+                .catch(getQuestionsFailed);
 
             function getQuestionsComplete(response) {
                 // TODO: side effect to set username
@@ -35,6 +33,22 @@
             function getQuestionsFailed(error) {
                 $log.error('XHR Failed for getQuiz\n' + angular.toJson(error.data, true));
             }
+        }
+
+        function submitQuiz(data){
+
+            return $http.put(apiHost + '/submission', data)
+                .then(putSubmissionComplete)
+                .catch(putSubmissionFailed);
+
+            function putSubmissionComplete(response) {
+                return response.data;
+            }
+
+            function putSubmissionFailed(error) {
+                $log.error('XHR Failed for getQuiz\n' + angular.toJson(error.data, true));
+            }
+
         }
     }
 })();

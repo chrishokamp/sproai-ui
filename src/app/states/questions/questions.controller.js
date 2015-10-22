@@ -6,11 +6,18 @@
     .controller('QuestionsController', QuestionsController);
 
     /** @ngInject */
-    function QuestionsController($rootScope, $scope, $state, $mdDialog, quizService) {
+    function QuestionsController($rootScope, $scope, $window, $state, $mdDialog, quizService) {
 
-        if (!$rootScope.quiz){
+        if (typeof $rootScope.quiz === 'undefined'){
             $state.go('^.home');
         }
+        $scope.progressValue = 0.5;
+
+
+        // Prevent refreshing during the quiz
+        angular.element($window).on('beforeunload', function (event) {
+            event.preventDefault();
+        });
 
         /**
         * Private Members and methods
@@ -20,39 +27,51 @@
                 return new Date().getTime();
             };
         }
+
         var startTime = Date.now();
 
-        var skipConfirm = $mdDialog.confirm()
-            .title('Skip Question?')
-            .content('Would you like to skip this question')
-            .ariaLabel('Skip Question')
-            .ok('Skip')
-            .cancel('No, Answer');
+        // var skipConfirm = $mdDialog.confirm()
+        //     .title('Skip Question?')
+        //     .content('Would you like to skip this question')
+        //     .ariaLabel('Skip Question')
+        //     .ok('Skip')
+        //     .cancel('No, Answer');
 
         var selectAlert = $mdDialog.alert()
             .title('Please select an answer')
             .content('You must first select and answer before continuing.')
             .ariaLabel('select an answer')
             .ok('ok');
+
+
         // nm: should I consider if .questions is null? - meh for now
         var questions = $rootScope.quiz.questions;
-        var questionPointer = 0;
+        var numberQuestions = questions.length;
+        var questionPointer = 0; /* Index into array of what question to display*/
         var answerChosen = false;
         var answers = [];
 
         var changeQuestion = function() {
             console.log("[qCtrl.changeQuestion] CALLED");
 
-            if (questionPointer == questions.length -1 ){
+            if (questionPointer === questions.length -1 ){
                 $scope.quizComplete = true;
+                $scope.progressValue = 100;
+                angular.element($window).off('beforeunload'); // allow users to refersh the page now? maybe this should be after submit.
                 return;
             }
 
             questionPointer++;
             $scope.currentQuestion = questions[questionPointer];
             $scope.questionNumber = questionPointer + 1;
+            $scope.progressValue = questionPointer / numberQuestions * 100;
+            console.log($scope.progressValue);
             answerChosen = false;
-        }
+
+            if(questionPointer == 20){ //Minimum number of questions to answer before showing the submit button
+                $scope.showSubmit = true;
+            }
+        };
 
         /**
         * "Public" Members and methods
@@ -60,16 +79,16 @@
 
         console.log("[qCtrl               ] currentQuestion: " + questions[questionPointer].question_id);
         $scope.currentQuestion = questions[questionPointer];
-        $scope.questionNumber = questionPointer + 1;
+        $scope.questionNumber = questionPointer + 1; /* Question number being displayed (couting from 1)*/
+        $scope.questionsAnswered = 0; /* Becaused there is time between answering and mocing on the the next question.*/
+        $scope.correctCount = 0;
+        $scope.showSubmit = false;
         $scope.quizComplete = false;
 
-        this.selectQuestion = function(ev, index) {
-            console.log("[qCtrl.selectQuestion ] CALLED");
-            if(!answerChosen){
+        this.selectAnswer = function(ev, index) {
+            console.log("[qCtrl.selectQuestion] CALLED");
+            if(!answerChosen){  // can only answer a question once.
                 answerChosen = true;
-                console.log(ev);
-                console.log(index);
-                console.log(questions[questionPointer].answers[index]);
 
                 answers.push(
                     {
@@ -77,9 +96,10 @@
                         answer: index + 1
                     }
                 );
-
-                if (index + 1 == questions[questionPointer].correct_answer){
+                $scope.questionsAnswered++;
+                if (index + 1 === questions[questionPointer].correct_answer){
                     ev.target.className += " correct";
+                    $scope.correctCount++;
                 } else {
                     ev.target.className += " incorrect";
                     var correct = document.getElementById("answer-" + (questions[questionPointer].correct_answer - 1));
@@ -89,7 +109,7 @@
         };
 
         this.nextQuestion = function(ev) {
-            console.log("[qCtrl.nextQuestion   ] CALLED");
+            console.log("[qCtrl.nextQuestion  ] CALLED");
             // Has the user selected an answer
             if(!answerChosen){
                 $mdDialog.show(selectAlert);
@@ -103,7 +123,12 @@
         */
         this.submitAnswers = function(ev) {
             console.log("[qCtrl.submitAnswers  ] CALLED");
+            console.log($rootScope.quiz.userName);
+            console.log(startTime);
+            console.log(Date.now() - startTime);
             console.log(answers);
+
+            quizService.submitQuiz({"answers": answers});
         };
     }
 })();

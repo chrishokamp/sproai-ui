@@ -1,19 +1,23 @@
-<div>
+<div layout="column" layout-align="center center">
     <div class="questionCard">
         <div class="nextArrow" ng-show="!quizComplete">
             <span class="ion-android-arrow-dropright-circle" ng-click="qCtrl.nextQuestion($event)"></span>
         </div>
 
         <div class="header">
-            Question {{questionNumber}}: {{currentQuestion.question_str}}
+            {{questionNumber}}.  {{currentQuestion.question_str}}
         </div>
-
-        <div ng-repeat="answer in currentQuestion.answers" class="answers">
-            <div class="answer" id="answer-{{$index}}"ng-click="qCtrl.selectQuestion($event, $index)">
-                {{answer}}
+        <div class="answersWrapper">
+            <div ng-repeat="answer in currentQuestion.answers" class="answers">
+                <div class="answer" id="answer-{{$index}}"ng-click="qCtrl.selectAnswer($event, $index)">
+                    {{answer}}
+                </div>
             </div>
         </div>
     </div>
-
-        <md-button ng-click="qCtrl.submitAnswers($event)" ng-show="quizComplete" class="md-raised">Submit</md-button>
+    <md-progress-linear class="progress" md-mode="determinate" value="{{progressValue}}" ></md-progress-linear>
+    <div class="submitCard" layout="column" layout-align="start end">
+        <span class="score"> Score: {{correctCount}}/{{questionsAnswered}}</span><br />
+        <a class="button button-primary"  ng-click="qCtrl.submitAnswers($event)" ng-show="showSubmit" >Submit</a>
+    </div>
 </div>
