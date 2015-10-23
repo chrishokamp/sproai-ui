@@ -67,7 +67,7 @@
             console.log($scope.progressValue);
             answerChosen = false;
 
-            if(questionPointer == 10){ //Minimum number of questions to answer before showing the submit button
+            if(questionPointer == 20){ //Minimum number of questions to answer before showing the submit button
                 $scope.showSubmit = true;
             }
         };
