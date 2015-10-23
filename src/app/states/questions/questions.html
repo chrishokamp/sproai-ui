@@ -17,7 +17,7 @@
     </div>
     <md-progress-linear class="progress" md-mode="determinate" value="{{progressValue}}" ></md-progress-linear>
     <div class="submitCard" layout="column" layout-align="start end">
-        <span class="score"> Score: {{correctCount}}/{{questionsAnswered}}</span><br />
+        <!-- <span class="score"> Score: {{correctCount}}/{{questionsAnswered}}</span><br /> --> <!--Uncomment to have score display -->
         <a class="button button-primary"  ng-click="qCtrl.submitAnswers($event)" ng-show="showSubmit" >Submit</a>
     </div>
 </div>

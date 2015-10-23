@@ -13,7 +13,6 @@
         }
         $scope.progressValue = 0.5;
 
-
         // Prevent refreshing during the quiz
         angular.element($window).on('beforeunload', function (event) {
             event.preventDefault();
@@ -68,10 +67,16 @@
             console.log($scope.progressValue);
             answerChosen = false;
 
-            if(questionPointer == 20){ //Minimum number of questions to answer before showing the submit button
+            if(questionPointer == 10){ //Minimum number of questions to answer before showing the submit button
                 $scope.showSubmit = true;
             }
         };
+
+        var changeState = function(){
+            console.log("[qCtrl.changeState   ] CALLED");
+            $state.go('^.thanks')
+
+        }
 
         /**
         * "Public" Members and methods
@@ -90,12 +95,18 @@
             if(!answerChosen){  // can only answer a question once.
                 answerChosen = true;
 
+                // if (questionPointer == 0){
+                //     startTime = Date.now();
+                // }
+
                 answers.push(
                     {
                         question_id: questions[questionPointer].question_id,
-                        answer: index + 1
+                        choosen_answer: index + 1,
+                        correct_answer: questions[questionPointer].correct_answer
                     }
                 );
+
                 $scope.questionsAnswered++;
                 if (index + 1 === questions[questionPointer].correct_answer){
                     ev.target.className += " correct";
@@ -123,12 +134,15 @@
         */
         this.submitAnswers = function(ev) {
             console.log("[qCtrl.submitAnswers  ] CALLED");
-            console.log($rootScope.quiz.userName);
-            console.log(startTime);
-            console.log(Date.now() - startTime);
-            console.log(answers);
 
-            quizService.submitQuiz({"answers": answers});
+            var timeTaken = Date.now() - startTime;
+
+            quizService.submitQuiz({
+                "userName": $rootScope.quiz.userName,
+                "startTime": startTime,
+                "timeTaken": timeTaken,
+                "answers": answers
+            }).then(changeState);
         };
     }
 })();

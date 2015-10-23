@@ -37,7 +37,7 @@
 
         function submitQuiz(data){
 
-            return $http.put(apiHost + '/submission', data)
+            return $http.put(apiHost + '/questions', data)
                 .then(putSubmissionComplete)
                 .catch(putSubmissionFailed);
 

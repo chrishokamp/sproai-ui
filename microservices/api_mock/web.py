@@ -738,7 +738,7 @@ def get_questions():
 
     return jsonify({"userName": userName, "questions": questions})
 
-@app.route('/submission', methods=['PUT'])
+@app.route('/questions', methods=['PUT'])
 @cross_origin()
 def submission():
     print(request.json)

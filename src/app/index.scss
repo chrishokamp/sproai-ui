@@ -285,11 +285,15 @@ div.loginCard{
         width:340px;
         margin-bottom: 40px;
     }
-    input{
-        width:90%;
-        margin-bottom: 20px;
+    form {
+        width: 100%;
     }
-    button{
+    input{
+        width:80%;
+        margin:0px auto 20px;
+        display: block;
+    }
+    .button{
         width: 30%;
     }
 }

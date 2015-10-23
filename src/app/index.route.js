@@ -20,12 +20,6 @@
             controllerAs: 'main',
             parent: 'main'
         })
-        .state('main.question', {
-            url: '/question',
-            templateUrl: 'app/states/question_card/question.html',
-            controller: 'QuestionController',
-            controllerAs: 'qCtrl'
-        })
         .state('main.questions', {
             url: '/questions',
             templateUrl: 'app/states/questions/questions.html',
@@ -33,11 +27,12 @@
             controllerAs: 'qCtrl',
             parent: 'main'
         })
-        .state('main.questionNav', {
-            url: '/questionNav',
-            templateUrl: 'app/states/question_card/question.navigator.html',
-            controller: 'QuestionControllerNav',
-            controllerAs: 'qCtrlNav'
+        .state('main.thanks', {
+            url: '/thanks',
+            templateUrl: 'app/states/thanks/thanks.html',
+            controller: 'MainController',
+            controllerAs: 'main',
+            parent: 'main'
         });
 
         $urlRouterProvider.otherwise('/home');
